@@ -1,0 +1,8 @@
+<template>
+  <router-view />
+</template>
+
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:#f5f6f8; }
+</style>
