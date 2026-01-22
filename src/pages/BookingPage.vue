@@ -85,4 +85,4 @@ function goHome() {
 }
 </script>
 
-<style scoped src="./BookingPage.css"></style>
+<style scoped src="../assets/styles/BookingPage.css"></style>

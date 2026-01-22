@@ -31,4 +31,4 @@ const router = useRouter()
 const goHome = () => router.push('/')
 </script>
 
-<style scoped src="./LoginPage.css"></style>
+<style scoped src="../assets/styles/LoginPage.css"></style>

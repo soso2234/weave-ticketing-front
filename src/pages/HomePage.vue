@@ -116,4 +116,4 @@ async function goQueue(p) {
 }
 </script>
 
-<style scoped src="./HomePage.css"></style>
+<style scoped src="../assets/styles/HomePage.css"></style>
