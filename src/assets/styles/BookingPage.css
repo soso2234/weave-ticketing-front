@@ -1,9 +1,16 @@
-.page { min-height: 100vh; padding-bottom: 92px; }
+.page {
+  min-height: 100vh;
+  padding-bottom: 92px;
+  background:
+    radial-gradient(600px 260px at 0% 0%, #fde2e4, transparent 45%),
+    radial-gradient(600px 260px at 100% 10%, #dbeafe, transparent 45%),
+    linear-gradient(180deg, #fdf2f8, #eff6ff);
+}
 
 .container { width: min(1100px, 92vw); margin: 0 auto; }
 
 .header {
-  background: #3a3f4b;
+  background: linear-gradient(135deg, #fb7185, #60a5fa);
   color: #fff;
 }
 .headInner {
@@ -23,13 +30,13 @@
 
 .sub {
   padding: 10px 0 14px;
-  color: #ffb3b3;
+  color: #fff;
   font-weight: 800;
   line-height: 1.6;
 }
 .seatLine { font-weight: 900; }
 .hintText {
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.75);
   font-weight: 700;
 }
 
@@ -40,6 +47,7 @@
   font-size: 46px;
   font-weight: 900;
   margin: 10px 0 18px;
+  color: #ec4899;
 }
 
 .grid {
@@ -52,22 +60,24 @@
 
 .seat {
   height: 48px;
-  border: 1px solid #cfcfd6;
-  background: #fff;
+  border: 1px solid #fbcfe8;
+  background: #ffffff;
   border-radius: 12px;
   cursor: pointer;
   font-weight: 900;
+  color: #374151;
 }
 .seat.selected {
-  background: #ffe66d;
-  border-color: #e1c94e;
+  background: linear-gradient(135deg, #fb7185, #60a5fa);
+  border-color: #f472b6;
+  color: #fff;
 }
 
 .bottomBar {
   position: fixed;
   left: 0; right: 0; bottom: 0;
   height: 80px;
-  background: #e74c3c;
+  background: linear-gradient(135deg, #fb7185, #60a5fa);
   display: flex;
   align-items: center;
   z-index: 50;
@@ -84,7 +94,7 @@
 }
 .reserve {
   border: none;
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.2);
   color: #fff;
   font-size: 18px;
   font-weight: 900;

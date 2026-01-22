@@ -1,0 +1,66 @@
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(600px 260px at 0% 0%, #fde2e4, transparent 45%),
+    radial-gradient(600px 260px at 100% 10%, #dbeafe, transparent 45%),
+    linear-gradient(180deg, #fdf2f8, #eff6ff);
+}
+
+.topbar {
+  height: 64px;
+  background: white;
+  border-bottom: 2px solid #fbcfe8;
+  display: grid;
+  grid-template-columns: 64px 1fr 64px;
+  align-items: center;
+}
+
+.back {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #ec4899;
+  cursor: pointer;
+}
+
+.title {
+  text-align: center;
+  font-weight: 900;
+  color: #ec4899;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  padding: 48px 0;
+}
+
+.centerCard {
+  width: min(520px, 92vw);
+  background: linear-gradient(180deg, #ffffff, #fdf2f8);
+  border-radius: 24px;
+  padding: 28px 22px 30px;
+  box-shadow: 0 16px 36px rgba(236, 72, 153, 0.18);
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.avatar {
+  font-size: 32px;
+}
+
+.name {
+  font-weight: 900;
+  color: #ec4899;
+}
+
+.desc {
+  font-size: 13px;
+  color: #555;
+  margin-top: 2px;
+}

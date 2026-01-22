@@ -1,0 +1,71 @@
+.bookingSection {
+  margin-top: 12px;
+}
+
+.sectionTitle {
+  font-weight: 900;
+  color: #ec4899;
+  margin-bottom: 14px;
+}
+
+.card {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid #fbcfe8;
+  margin-bottom: 12px;
+  background: white;
+}
+
+.posterImg {
+  width: 64px;
+  height: 90px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.content {
+  flex: 1;
+}
+
+.title {
+  font-weight: 800;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  font-size: 12.5px;
+}
+
+.label {
+  color: #ec4899;
+  font-weight: 700;
+}
+
+.value {
+  color: #444;
+}
+
+.status {
+  margin-top: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 800;
+  display: inline-block;
+}
+
+.status.done {
+  background: #fdf2f8;
+  color: #ec4899;
+}
+
+.status.cancel {
+  background: #eff6ff;
+  color: #6366f1;
+}
