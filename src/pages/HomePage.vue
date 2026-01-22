@@ -104,6 +104,7 @@ async function goQueue(p) {
     localStorage.setItem('userId', userId)
 
     // Queue 화면으로 이동
+    //test
     router.push({ path: '/queue', query: { eventId, token: data.queueToken } })
   } catch (e) {
     console.error(e)
