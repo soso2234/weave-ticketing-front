@@ -33,7 +33,6 @@
 
 .spacer{ }
 
-
 .main{
   padding: 40px 0;
 }
@@ -95,11 +94,26 @@
   transform: translateY(-2px);
 }
 
-.email{
-  margin-top: 20px;
+.homeLoginBtn {
+  flex: 1;
+  height: 40px;
+  border-radius: 99px;
   border: none;
-  background: transparent;
-  color: #ec4899;
-  font-weight: 700;
+  background: linear-gradient(135deg, #fb7185, #60a5fa);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 15px;
   cursor: pointer;
+  box-shadow: 0 6px 18px rgba(236, 72, 153, 0.35);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.homeLoginBtn:hover {
+  transform: translateY(-2px);
+}
+
+.emailRow {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
 }

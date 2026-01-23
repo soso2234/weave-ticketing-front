@@ -9,17 +9,23 @@
     <main class="main">
       <div class="card">
         <div class="logo">weave</div>
+
         <div class="subtitle">
           간편하게 로그인하고<br />
           다양한 서비스를 이용하세요.
         </div>
 
-        <button class="btn kakao" @click="openKakaoLogin">카카오톡으로 시작</button>
+        <button class="btn kakao" @click="openKakaoLogin">
+          카카오톡으로 시작
+        </button>
         <button class="btn white">Google로 시작</button>
         <button class="btn white">Apple으로 등록</button>
         <button class="btn white">Facebook으로 시작</button>
 
-        <button class="email">이메일로 로그인하기</button>
+        <div class="emailRow">
+          <button class="homeLoginBtn" @click="goEmailLogin">이메일로 로그인하기</button>
+          <button class="homeLoginBtn" @click="goSignup">회원가입</button>
+        </div>
       </div>
     </main>
   </div>
@@ -30,11 +36,15 @@ import { useRouter } from 'vue-router'
 import { onMounted, onBeforeUnmount } from 'vue'
 
 const router = useRouter()
-const goHome = () => router.push('/')
 
-// 백엔드가 다른 프로젝트/서버라면 full URL 필수(클라우드 올릴시 domain 주소로 변경)
+const goHome = () => router.push('/')
+const goSignup = () => router.push('/signup')
+const goEmailLogin = () => router.push('/email-login')
+
+
+// 백엔드가 다른 프로젝트/서버라면 full URL 필수 (배포 시 도메인으로 변경)
 const API_BASE = 'http://localhost:3000'
-const BACKEND_ORIGIN = API_BASE // origin 검증용
+const BACKEND_ORIGIN = API_BASE
 
 function openKakaoLogin() {
   const url = `${API_BASE}/auth/kakao`
@@ -60,14 +70,11 @@ function onKakaoMessage(event) {
   const data = event.data
   if (!data || data.ok !== true || !data.user?.id) return
 
-  // 3) 로그인 정보 저장(일단 localStorage)
+  // 3) 로그인 정보 저장
   localStorage.setItem('auth_user', JSON.stringify(data.user))
 
   // 4) 홈으로 이동
   router.push('/')
-
-  console.log('origin=', event.origin, 'data=', event.data)
-
 }
 
 onMounted(() => {
