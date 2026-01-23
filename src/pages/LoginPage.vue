@@ -18,9 +18,12 @@
         <button class="btn kakao" @click="openKakaoLogin">
           카카오톡으로 시작
         </button>
-        <button class="btn white">Google로 시작</button>
-        <button class="btn white">Apple으로 등록</button>
-        <button class="btn white">Facebook으로 시작</button>
+        <button class="btn white" @click="openGoogleLogin">
+          Google로 시작</button>
+        <button class="btn white" @click="openAppleLogin">
+          Apple으로 등록</button>
+        <button class="btn white" @click="openFacebookLogin">
+          Facebook으로 시작</button>
 
         <div class="emailRow">
           <button class="homeLoginBtn" @click="goEmailLogin">이메일로 로그인하기</button>
@@ -59,6 +62,18 @@ function openKakaoLogin() {
     'kakaoLogin',
     `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`
   )
+}
+
+function openGoogleLogin() {
+  alert('서비스 준비 중입니다.')
+}
+
+function openAppleLogin() {
+  alert('서비스 준비 중입니다.')
+}
+
+function openFacebookLogin() {
+  alert('서비스 준비 중입니다.')
 }
 
 // 팝업에서 postMessage로 넘어오는 로그인 성공 신호 처리
