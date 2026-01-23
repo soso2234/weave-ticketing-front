@@ -2,7 +2,21 @@
   <div class="page">
     <header class="topbar">
       <div class="brand" translate="no">티켓 예매</div>
-      <button class="login" @click="goLogin" translate="no">로그인</button>
+
+      <!-- 오른쪽 상단 버튼 영역 -->
+      <div class="actions">
+        <!-- 로그인 전 -->
+        <button v-if="!isLoggedIn" class="login" @click="goLogin" translate="no">
+          로그인
+        </button>
+
+        <!-- 로그인 후 -->
+        <template v-else>
+          <button class="login" @click="goMyPage" translate="no">마이페이지</button>
+          <button class="login" @click="goMyReservations" translate="no">예매내역</button>
+          <button class="login" @click="logout" translate="no">로그아웃</button>
+        </template>
+      </div>
     </header>
 
     <main class="main">
@@ -31,8 +45,18 @@
       <div class="focus">
         <button class="x" @click="closePoster" aria-label="close">✕</button>
         <img :src="selected.image" :alt="selected.title" class="focusImg" />
-        <button class="reserveFloating" @click="goQueue(selected)" translate="no">예매하기</button>
-        <button class="reserveFloating" @click="goQueue(selected)" :disabled="loading" translate="no">{{ loading ? "요청 중..." : "예매하기" }}</button>
+
+        <!-- 기존 버튼이 중복으로 2개 있어 하나만 남기는 게 정상인데,
+             현재 동작 유지 원하면 아래 1개만 사용하세요. -->
+        <button
+          class="reserveFloating"
+          @click="goQueue(selected)"
+          :disabled="loading"
+          translate="no"
+        >
+          {{ loading ? "요청 중..." : "예매하기" }}
+        </button>
+
         <p v-if="error" style="color:crimson; margin-top:12px">
           {{ error }}
         </p>
@@ -42,7 +66,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 
 import poster1 from '../assets/posters/poster1.jpg'
@@ -55,10 +79,53 @@ import poster7 from '../assets/posters/poster7.jpg'
 import poster8 from '../assets/posters/poster8.jpg'
 import poster9 from '../assets/posters/poster9.jpg'
 
-
-
 const router = useRouter()
 const selected = ref(null)
+
+// 로그인 상태
+const isLoggedIn = ref(false)
+
+function refreshAuthState() {
+  try {
+    const raw = localStorage.getItem('auth_user')
+    isLoggedIn.value = !!raw
+  } catch {
+    isLoggedIn.value = false
+  }
+}
+
+function goLogin() {
+  router.push('/login')
+}
+
+function goMyPage() {
+  // 라우트는 나중에 만들 예정이라면 일단 placeholder로 이동만
+  router.push('/mypage')
+}
+
+function goMyReservations() {
+  router.push('/reservations')
+}
+
+function logout() {
+  localStorage.removeItem('auth_user')
+  refreshAuthState()
+  // 홈에 그대로 두고 UI만 변경 (원하면 router.push('/')도 가능)
+}
+
+// storage 이벤트: 다른 탭/창에서 localStorage 변경 시 반영
+function onStorageChange(e) {
+  if (e.key === 'auth_user') refreshAuthState()
+}
+
+onMounted(() => {
+  refreshAuthState()
+  window.addEventListener('storage', onStorageChange)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('storage', onStorageChange)
+})
 
 // 백엔드가 다른 프로젝트/서버라면 full URL 필수(클라우드 올릴시 domain 주소로 변경)
 const API_BASE = 'http://localhost:3000'
@@ -77,12 +144,8 @@ const posters = ref([
   { id: 7, title: '뮤지컬<빨래>', sub: 'NOL 유니플렉스 2관 2026.03.15', image: poster7 },
   { id: 8, title: '뮤지컬<홍련>', sub: '충무아트센터 중극장 블랙 2026.03.17', image: poster8 },
   { id: 9, title: '뮤지컬<어서 오세요,휴남동 서점입니다>', sub: '루미나아트홀 2026.03.31', image: poster9 },
-
 ])
 
-function goLogin() {
-  router.push('/login')
-}
 function openPoster(p) {
   selected.value = p
 }
@@ -119,15 +182,12 @@ async function goQueue(p) {
     localStorage.setItem('userId', userId)
 
     // Queue 화면으로 이동
-    //test
     router.push({ path: '/queue', query: { eventId, token: data.queueToken } })
   } catch (e) {
     console.error(e)
     error.value = '대기열 진입에 실패했습니다. 백엔드(3000) 실행/ CORS 설정을 확인하세요.'
   } finally {
     loading.value = false
-    // (선택) 오버레이 닫기
-    // selected.value = null
   }
 }
 </script>

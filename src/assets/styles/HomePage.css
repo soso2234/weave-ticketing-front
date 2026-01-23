@@ -39,6 +39,12 @@
   box-shadow: 0 6px 18px rgba(236, 72, 153, 0.35);
 }
 
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
 .main {
   padding: 40px 0;
 }
