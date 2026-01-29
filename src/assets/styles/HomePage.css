@@ -200,3 +200,21 @@
     height: 320px;
   }
 }
+
+@media (max-width: 768px) {
+  .topbar {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .actions {
+    justify-self: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .login {
+    padding: 6px 8px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+}
