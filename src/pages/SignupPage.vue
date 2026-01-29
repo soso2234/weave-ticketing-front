@@ -48,28 +48,52 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+  import { ref } from 'vue'
+  import { useRouter } from 'vue-router'
 
-const router = useRouter()
+  const router = useRouter()
 
-const email = ref('')
-const password = ref('')
+  const name = ref('')
+  const email = ref('')
+  const password = ref('')
 
-const goLogin = () => router.push('/login')
+  const goLogin = () => router.push('/login')
+  const API_BASE = import.meta.env.VITE_API_BASE_URL
 
-function signup() {
-  if (!email.value || !password.value) {
-    alert('이메일과 비밀번호를 입력해주세요')
-    return
+  async function signup() {
+    if (!name.value || !email.value || !password.value) {
+      alert('이름, 이메일, 비밀번호를 모두 입력해주세요')
+      return
+    }
+
+    try {
+      // `${API_BASE}/auth/signup`
+      const res = await fetch('http://localhost:3000/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name.value,
+          email: email.value,
+          password: password.value,
+        }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        if (res.status === 409) {
+          alert('이미 가입된 이메일입니다.')
+          return
+        }
+        throw new Error(data.error)
+      }
+
+      alert('회원가입 완료! 로그인 페이지로 이동합니다.')
+      router.push('/login')
+    } catch (err) {
+      console.error('signup error:', err)
+      alert('회원가입 중 오류가 발생했습니다.')
+    }
   }
-
-  // 🔧 지금은 UI용 (백엔드 연결 시 API 호출)
-  console.log('signup:', email.value, password.value)
-
-  alert('회원가입 완료! 로그인 페이지로 이동합니다.')
-  router.push('/login')
-}
 </script>
-
 <style scoped src="../assets/styles/SignupPage.css"></style>

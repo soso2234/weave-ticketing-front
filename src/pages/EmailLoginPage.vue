@@ -40,33 +40,64 @@
     </main>
   </div>
 </template>
-
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+  import { ref } from 'vue'
+  import { useRouter } from 'vue-router'
 
-const router = useRouter()
+  const router = useRouter()
 
-const email = ref('')
-const password = ref('')
+  const email = ref('')
+  const password = ref('')
 
-const goBack = () => router.push('/login')
-const goSignup = () => router.push('/signup')
+  // 뒤로가기 / 회원가입
+  const goBack = () => router.push('/login')
+  const goSignup = () => router.push('/signup')
 
-function login() {
-  if (!email.value || !password.value) {
-    alert('이메일과 비밀번호를 입력해주세요')
-    return
+  // 백엔드 API 주소 (.env)
+  const API_BASE = import.meta.env.VITE_API_BASE_URL
+
+  async function login() {
+    if (!email.value || !password.value) {
+      alert('이메일과 비밀번호를 입력해주세요')
+      return
+    }
+
+    try {
+      // http://localhost:3000/
+      // `${API_BASE}/auth/login`,
+      const res = await fetch('http://localhost:3000/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email.value,
+          password: password.value,
+        }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        if (res.status === 401) {
+          alert('이메일 또는 비밀번호가 올바르지 않습니다.')
+          return
+        }
+        if (res.status === 403 && data?.error === 'not_local_account') {
+          alert('카카오로 가입된 계정입니다. 카카오 로그인을 이용해주세요.')
+          return
+        }
+        alert('로그인에 실패했습니다.')
+        return
+      }
+
+      // 로그인 성공 → 카카오 로그인과 동일한 방식으로 저장
+      localStorage.setItem('auth_user', JSON.stringify(data.user))
+
+      alert('로그인 완료!')
+      router.push('/')
+    } catch (err) {
+      console.error('POST /auth/login failed:', err)
+      alert('서버 연결에 실패했습니다.')
+    }
   }
-
-  // UI 테스트용 (나중에 API로 교체)
-  const user = {
-    email: email.value,
-  }
-
-  localStorage.setItem('auth_user', JSON.stringify(user))
-  router.push('/')
-}
 </script>
-
 <style scoped src="../assets/styles/SignupPage.css"></style>
