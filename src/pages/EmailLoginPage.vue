@@ -2,7 +2,7 @@
   <div class="page">
     <header class="topbar">
       <button class="back" @click="goBack">←</button>
-      <div class="title">이메일 로그인</div>
+      <div class="title" @click="goHome">이메일 로그인</div>
       <div class="spacer"></div>
     </header>
 
@@ -20,6 +20,7 @@
           type="email"
           placeholder="이메일"
           v-model="email"
+          @keydown.enter.prevent="login"
         />
 
         <input
@@ -27,6 +28,7 @@
           type="password"
           placeholder="비밀번호"
           v-model="password"
+          @keydown.enter.prevent="login"
         />
 
         <button class="btn primary" @click="login">
@@ -50,6 +52,7 @@
   const password = ref('')
 
   // 뒤로가기 / 회원가입
+  const goHome = () => router.push('/')
   const goBack = () => router.push('/login')
   const goSignup = () => router.push('/signup')
 

@@ -2,7 +2,7 @@
   <div class="page">
     <header class="topbar">
       <button class="back" @click="goLogin">←</button>
-      <div class="title">회원가입</div>
+      <div class="title" @click="goHome">회원가입</div>
       <div class="spacer"></div>
     </header>
 
@@ -94,6 +94,10 @@
       console.error('signup error:', err)
       alert('회원가입 중 오류가 발생했습니다.')
     }
+  }
+
+  function goHome() {
+    router.push('/') // 메인으로
   }
 </script>
 <style scoped src="../assets/styles/SignupPage.css"></style>

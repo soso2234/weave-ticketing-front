@@ -2,12 +2,11 @@
   <div class="page">
     <header class="topbar">
       <div class="brandLeft" aria-hidden="true"></div>
-      <div class="brand">티켓 예매</div>
+      <div class="brand" @click="goHome">티켓 예매</div>
       <div class="actions">
         <button v-if="!isLoggedIn" class="login" @click="goLogin" translate="no">로그인</button>
         <template v-else>
-          <button class="login" @click="goMyPage" translate="no">마이페이지</button>
-          <button class="login" @click="goMyReservations" translate="no">예매내역</button>
+          <button class="login" @click="goMyPage" translate="no">예매내역</button>
           <button class="login" @click="logout" translate="no">로그아웃</button>
         </template>
       </div>
@@ -212,6 +211,10 @@ async function goQueue(p) {
   } finally {
     loading.value = false
   }
+}
+
+function goHome() {
+  router.push('/') // 메인으로
 }
 
 </script>

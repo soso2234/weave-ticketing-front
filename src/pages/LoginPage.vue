@@ -2,7 +2,7 @@
   <div class="page">
     <header class="topbar">
       <button class="back" @click="goHome">←</button>
-      <div class="title">로그인</div>
+      <div class="title" @click="goHome">로그인</div>
       <div class="spacer"></div>
     </header>
 

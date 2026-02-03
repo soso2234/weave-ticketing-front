@@ -81,6 +81,10 @@ onMounted(async () => {
   userId.value = id
   await fetchUserProfile(id)
 })
+
+function goHome() {
+  router.push('/') // 메인으로
+}
 </script>
 
 <style scoped src="../assets/styles/MyPage.css"></style>

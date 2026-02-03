@@ -29,6 +29,8 @@
   font-weight: 900;
   font-size: 18px;
   color: #ec4899;
+  cursor: pointer;
+  user-select: none;
 }
 
 .spacer{ }

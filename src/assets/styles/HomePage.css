@@ -33,6 +33,8 @@
 
   /* ✅ 타이틀을 진짜 가운데로 */
   justify-self: center;
+  cursor: pointer;
+  user-select: none;
 }
 
 .actions {
