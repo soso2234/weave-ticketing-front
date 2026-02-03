@@ -7,6 +7,7 @@
         <button v-if="!isLoggedIn" class="login" @click="goLogin" translate="no">로그인</button>
         <template v-else>
           <button class="login" @click="goMyPage" translate="no">예매내역</button>
+          <button class="login" @click="goMyPage" translate="no">테스트</button>
           <button class="login" @click="logout" translate="no">로그아웃</button>
         </template>
       </div>
